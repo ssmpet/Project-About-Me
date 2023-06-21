@@ -23,10 +23,22 @@
         a { text-decoration:none;  }
         .mylogo {
             margin-top: 15px;
-            font-size="200";
-            font-family="Gasoek One";
-            font-weight: 900;
-            color: #fff;
+            font-size:"200";
+            font-family:"Gasoek One";
+            font-weight: 500;
+            color: #e25536;
+        }
+        .myhmenu {
+            color: #f37255;
+            opacity: 0.9;
+        }
+        .mynav {
+            
+            border-bottom: 3px solid #f4876e;
+        }
+
+        .left_menu {
+            color: #0050bd;
         }
     </style>
     <!-- {% with messages = get_flashed_messages() %}
@@ -43,29 +55,41 @@
 </head>
 <body>
 
-    <nav class="navbar navbar-expand-sm navbar-light fixed-top" style="background: #e25536;">
+    <nav class="navbar navbar-expand-sm navbar-light fixed-top mynav">
         <div class="container-fluid">
             <a class="navbar-brand mx-5" href="#">
                 <b class="mylogo">KHW</b>
             </a>
 
-            <ul class="navbar-nav me-auto">
+            <ul class="navbar-nav nav-pills me-auto">
                 <li class="nav-item ms-3">
-                    <a class="nav-link " href="#">
-                        <i class="fas fa-home"></i>
-                        <b>Home</b>
+                    <a class="nav-link" href="#">
+                        <b class="myhmenu">Home</b>
                     </a>
                 </li>
                 <li class="nav-item ms-3">
                     <a class="nav-link" href="#">
-                        <i class="fa-sharp fa-solid fa-user-group"></i>
-                        <b>사용자</b>
+                        <b class="myhmenu">ABOUT ME</b>
                     </a>
                 </li>
-                <li class="nav-item dropdown ms-3">
+                <li class="nav-item ms-3">
+                    <a class="nav-link" href="#">
+                        <b class="myhmenu">게시판</b>
+                    </a>
+                </li>
+                <li class="nav-item ms-3">
+                    <a class="nav-link" href="#">
+                        <b class="myhmenu">스케줄</b>
+                    </a>
+                </li>
+                <li class="nav-item ms-3">
+                    <a class="nav-link" href="#">
+                        <b class="myhmenu">로그인</b>
+                    </a>
+                </li>
+                <!-- <li class="nav-item dropdown ms-3">
                     <a class="nav-link dropdown-toggle " href="#" role="button" data-bs-toggle="dropdown">
-                        <i class="fa-sharp fa-solid fa-cloud-arrow-down"></i>
-                        <b>크롤링</b>
+                        <b class="myhmenu">크롤링</b>
                     </a>
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="/interpark">인터파크</a></li>
@@ -74,7 +98,7 @@
                         <li><hr class="dropdown-divider"></li>
                         <li><a class="dropdown-item" href="/genie_jquery">지니차트-jQuery버전</a></li>
                     </ul>
-                </li>
+                </li> -->
                 
                            
             </ul>  
@@ -85,20 +109,53 @@
     </nav>
 
     <!-- <div class="container" style="margin-top: 80px;"> -->
-    <div class="container-fluid" style="margin-top: 80px;">
+    <div class="container-fluid" style="margin-top: 60px;">
         <div class="row">
             
-            <div class="col-sm-3 p-4">
-                
+            <div class="col-sm-2 p-4">
+                <ul class="nav flex-column ">
+                    <li class="nav-item dropdown ">
+                        <a class="nav-link dropdown-toggle left_menu" href="#" role="button" data-bs-toggle="dropdown">지역분석(경기도)</a>
+                        <div class="dropdown-menu left_menu">
+                            <a class="dropdown-item left_menu" href="#">분석1</a>
+                            <a class="dropdown-item left_menu" href="#">분석2</a>
+                            <a class="dropdown-item left_menu" href="#">분석3</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle left_menu" href="#" role="button" data-bs-toggle="dropdown">크롤링</a>
+                        <div class="dropdown-menu left_menu">
+                            <a class="dropdown-item left_menu" href="#">크롤링1</a>
+                            <a class="dropdown-item left_menu" href="#">크롤링2</a>
+                            <a class="dropdown-item left_menu" href="#">크롤링3</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle left_menu" href="#" role="button" data-bs-toggle="dropdown">워드클라우드</a>
+                        <div class="dropdown-menu left_menu">
+                            <a class="dropdown-item left_menu" href="#">워드클라우드1</a>
+                            <a class="dropdown-item left_menu" href="#">워드클라우드2</a>
+                            <a class="dropdown-item left_menu" href="#">워드클라우드3</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle left_menu" href="#" role="button" data-bs-toggle="dropdown">추천시스템</a>
+                        <div class="dropdown-menu left_menu">
+                            <a class="dropdown-item left_menu" href="#">추천시스템1</a>
+                            <a class="dropdown-item left_menu" href="#">추천시스템2</a>
+                            <a class="dropdown-item left_menu" href="#">추천시스템3</a>
+                        </div>
+                    </li>
+                </ul>
 
-                <div class="mt-3">
+                <!-- <div class="mt-3">
                     {% block submenu %}{% endblock %}
-                </div>
+                </div> -->
 
             </div>
 
             <!-- 세부 정보 -->
-            <div class="col-sm-9 p-4">
+            <div class="col-sm-10 p-4">
                 <h3><strong>{% block subtitle %}{% endblock %}</strong></h3>
                 <hr>
                 {% block content %}{% endblock %}
