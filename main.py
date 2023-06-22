@@ -1,6 +1,7 @@
 from flask import Flask, render_template
 from word.word import word_bp
 from user.user import user_bp
+from aboutme.aboutme import aboutme_bp
 
 app = Flask(__name__)
 app.secret_key = 'qwert12345'
@@ -8,12 +9,13 @@ app.config['SESSION_COOKIE_PATH'] = '/'
 
 
 app.register_blueprint(user_bp, url_prefix='/user')
-# app.register_blueprint(schedule_bp, url_prefix='/schedule')
 app.register_blueprint(word_bp, url_prefix='/word')
+app.register_blueprint(aboutme_bp, url_prefix='/aboutme')
+# app.register_blueprint(schedule_bp, url_prefix='/schedule')
+
 word_bp.static_folder = app.static_folder
-
-
 user_bp.static_folder = app.static_folder
+aboutme_bp.static_folder = app.static_folder
 # schedule_bp.static_folder = app.static_folder
 # bbs_bp.static_folder = app.static_folder
 
@@ -41,16 +43,11 @@ def index():
     menu = {'ho': 1, 'us': 0, 'cr': 0, 'ai': 0, 'sc': 0, 'bb': 0}
     return render_template('main/home.html')
 
-@app.route('/aboutme')
-def aboutme():
-    menu = {'ho': 0, 'us': 1, 'cr': 0, 'ai': 0, 'sc': 0, 'bb': 0}
-    # print(g_quote)
-    return render_template('aboutme/user.html')
 
 
 
 if __name__ == '__main__':
     try:
-        app.run(debug=True)
+        app.run(debug=False)
     finally:
         print('main end')
