@@ -1,15 +1,19 @@
 from flask import Flask, render_template
+from word.word import word_bp
+from user.user import user_bp
 
 app = Flask(__name__)
 app.secret_key = 'qwert12345'
 app.config['SESSION_COOKIE_PATH'] = '/'
 
 
-# app.register_blueprint(user_bp, url_prefix='/user')
+app.register_blueprint(user_bp, url_prefix='/user')
 # app.register_blueprint(schedule_bp, url_prefix='/schedule')
-# app.register_blueprint(bbs_bp, url_prefix='/bbs')
+app.register_blueprint(word_bp, url_prefix='/word')
+word_bp.static_folder = app.static_folder
 
-# user_bp.static_folder = app.static_folder
+
+user_bp.static_folder = app.static_folder
 # schedule_bp.static_folder = app.static_folder
 # bbs_bp.static_folder = app.static_folder
 
@@ -47,6 +51,6 @@ def aboutme():
 
 if __name__ == '__main__':
     try:
-        app.run(debug=False)
+        app.run(debug=True)
     finally:
         print('main end')

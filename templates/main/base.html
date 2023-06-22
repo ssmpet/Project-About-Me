@@ -26,15 +26,11 @@
             font-size:"200";
             font-family:"Gasoek One";
             font-weight: 500;
-            color: #e25536;
+            color: #fff;
         }
         .myhmenu {
-            color: #f37255;
+            color: #fff;
             opacity: 0.9;
-        }
-        .mynav {
-            
-            border-bottom: 3px solid #f4876e;
         }
 
         .left_menu {
@@ -55,15 +51,15 @@
 </head>
 <body>
 
-    <nav class="navbar navbar-expand-sm navbar-light fixed-top mynav">
+    <nav class="navbar navbar-expand-sm bg-primary navbar-light fixed-top mynav">
         <div class="container-fluid">
-            <a class="navbar-brand mx-5" href="#">
+            <a class="navbar-brand mx-5" href="/">
                 <b class="mylogo">KHW</b>
             </a>
 
             <ul class="navbar-nav nav-pills me-auto">
                 <li class="nav-item ms-3">
-                    <a class="nav-link" href="#">
+                    <a class="nav-link" href="/">
                         <b class="myhmenu">Home</b>
                     </a>
                 </li>
@@ -130,13 +126,8 @@
                             <a class="dropdown-item left_menu" href="#">크롤링3</a>
                         </div>
                     </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle left_menu" href="#" role="button" data-bs-toggle="dropdown">워드클라우드</a>
-                        <div class="dropdown-menu left_menu">
-                            <a class="dropdown-item left_menu" href="#">워드클라우드1</a>
-                            <a class="dropdown-item left_menu" href="#">워드클라우드2</a>
-                            <a class="dropdown-item left_menu" href="#">워드클라우드3</a>
-                        </div>
+                    <li class="nav-item">
+                        <a class="nav-link left_menu" href="/word/word_cloud">워드클라우드</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle left_menu" href="#" role="button" data-bs-toggle="dropdown">추천시스템</a>
