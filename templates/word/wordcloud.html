@@ -7,10 +7,30 @@
 <style>
     
 </style>
+<script>
+    function callWord() {
+        // songId = request.form['optradio']
+        $.ajax()
+    }
+</script>
+
 {% endblock%}
 
 {% block content %}
 <div id="travel" class="container-fluid text-center">
+    <h4>네이버 헤드라인 뉴스에 대한 워드클아우드 입니다. </h4>
+    <h4>원하는 분야를 선택해 주세요.</h4><br><br>
+
+    <form action="#" method="post">
+        <input type="radio" name="word" value="100" checked> 정치
+        <input class="ms-3" type="radio" name="word" value="101"> 경제
+        <input class="ms-3" type="radio" name="word" value="102"> 사회
+        <input class="ms-3" type="radio" name="word" value="103"> 생활/문화
+        <input class="ms-3" type="radio" name="word" value="105"> IT/과학  
+        <input class="ms-3" type="radio" name="word" value="104"> 세계  
+        <button type="button" class="btn btn-primary ms-3" onclick="callWord()">실행</button>
+    </form>
+
     <div class="row">
         <div class="col-1"></div>
         <div class="col-10">
