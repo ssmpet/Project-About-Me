@@ -2,6 +2,8 @@ from flask import Flask, render_template
 from word.word import word_bp
 from user.user import user_bp
 from aboutme.aboutme import aboutme_bp
+from crawling.crawling import crawling_bp
+
 
 app = Flask(__name__)
 app.secret_key = 'qwert12345'
@@ -11,13 +13,9 @@ app.config['SESSION_COOKIE_PATH'] = '/'
 app.register_blueprint(user_bp, url_prefix='/user')
 app.register_blueprint(word_bp, url_prefix='/word')
 app.register_blueprint(aboutme_bp, url_prefix='/aboutme')
+app.register_blueprint(crawling_bp, url_prefix='/crawling')
 # app.register_blueprint(schedule_bp, url_prefix='/schedule')
 
-word_bp.static_folder = app.static_folder
-user_bp.static_folder = app.static_folder
-aboutme_bp.static_folder = app.static_folder
-# schedule_bp.static_folder = app.static_folder
-# bbs_bp.static_folder = app.static_folder
 
 ###########################################
 ## 서버를 처음 실행시킬 때 한번 실행된다.
@@ -44,10 +42,8 @@ def index():
     return render_template('main/home.html')
 
 
-
-
 if __name__ == '__main__':
     try:
-        app.run(debug=True)
+        app.run(debug=False)
     finally:
         print('main end')

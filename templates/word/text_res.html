@@ -1,0 +1,37 @@
+{% extends "main/base.html" %}
+{% block title %} 워드클라우드 {% endblock %}
+
+{% block subtitle %} 워드클라우드 - 텍스트파일 결과{% endblock %}
+
+{% block additional_head %}
+<style>
+    
+</style>
+<script>
+
+    $(document).ready(function() {
+
+
+    });
+    
+</script>
+
+{% endblock%}
+
+{% block content %}
+<div class="container-fluid">
+    <!-- <div class="row mt-3" id="myloading" style="display: none;">
+        <div class="col-10">
+            <img src="{{url_for('static', filename='img/loading.gif')}}" class="mx-auto d-block" alt="분석중" style="width:50%;">
+        </div>
+        <div class="col-2"></div>
+    </div>   -->
+    <div class="row mt-3">
+        <div class="col-10">
+            <img src="{{url_for('static', filename='img/word_text.png', q=mtime)}}" class="mx-auto d-block" alt="워드클라우드">
+        </div>
+        <div class="col-2"></div>
+    </div>  
+</div>
+<br><br><br>
+{% endblock %}

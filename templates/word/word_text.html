@@ -1,0 +1,115 @@
+{% extends "main/base.html" %}
+{% block title %} 워드클라우드 {% endblock %}
+
+{% block subtitle %} 워드클라우드 - 텍스트파일{% endblock %}
+
+{% block additional_head %}
+<style>
+    .mylable { width: 10%; text-align: center; }
+    .mycon { width: 50%; vertical-align: middle; }
+</style>
+<script>
+
+    $(document).ready(function() {
+
+        $('.myupload_text').on('change', function(){
+           
+            let fname = $(this).val().split('.').pop(); 
+            if (fname != 'txt' && fname !='') {
+                alert('텍스트 파일만 가능합니다.')
+                $(this).val('');
+                return false;
+            }            
+        });
+
+        $('.myupload_mask').on('change', function(){
+            let fname = $(this).val().split('.').pop();
+            if ( !(fname == 'jpg' || fname =='jpeg' || fname == 'png' || fname == 'gif' || fname == 'bmp') && fname !='') {
+                alert('JPG, JPEG, PNG, GIF, BMP 이미지 파일만 가능합니다.')
+                $(this).val('');
+                return false;
+            }            
+        });
+
+    });
+
+    function word_text() {
+    
+        if (  $('.myupload_text').val() == '' ) {
+            alert('텍스트 파일을 선택해 주세요.');
+            return false;
+        } 
+
+        $('#word_form').submit();
+
+
+    };
+    
+
+    
+</script>
+
+{% endblock%}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row mt-3">
+        <div class="col-1"></div>
+        <div class="col-10">
+            <form action="/word/text_res" method="post"  enctype="multipart/form-data" id="word_form">
+                <table class="table table-borderless table-lg">
+                    
+                    <tr>
+                        <td class="mylable"><label class="col-form-label">한영 구분</label></td>
+                        <td class="mycon">
+                            <input class="form-check-input mt-1" type="radio" name="lang" value="ko" id="lang" checked> 한글
+                            <input class="form-check-input mt-1 ms-3" type="radio" name="lang" value="en" id="lang"> 영어    
+                            <input class="form-check-input mt-1 ms-3" type="radio" name="lang" value="ko_en" id="lang"> 한글 + 영어
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="mylable"><label class="col-form-label mt-3">텍스트파일</label></td>
+                        <td class="mycon">
+                            <input type="file" class="form-control mt-3 myupload_text" accept=".txt" id="text" name="text" style="width: 65%" >
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="mylable"><label class="col-form-label  mt-3">마스크파일</label></td>
+                        <td class="mycon">
+                            <input type="file" class="form-control mt-3 myupload_mask" accept=".png, .jpg, .jpeg, .gif, .bmp" id="mask" name="mask" style="width: 65%">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="mylable"><label class="col-form-label mt-3">금지어<br>(Stopwords)</label></td>
+                        <td class="mycon">
+                            <textarea class="form-control  mt-3" name="stop_words" id="stop_words" cols="60" rows="5" style="width: 65%;"></textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td class="mycon">
+                            <button type="button" class="btn btn-primary ms-5" onclick="word_text()">실행</button>
+                            <input class="btn btn-secondary ms-3" type="reset" value="취소">
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+        <div class="col-1"></div>
+    </div>
+
+    <div class="row mt-3" id="myloading" style="display: none;">
+        <div class="col-10">
+            <img src="{{url_for('static', filename='img/loading.gif')}}" class="mx-auto d-block" alt="분석중" style="width:50%;">
+        </div>
+        <div class="col-2"></div>
+    </div>  
+    <div class="row mt-3" id="mywordcloud" style="display:none;">
+        <div class="col-10">
+            <img src="#" class="mx-auto d-block" id="mywordcloud_img" alt="워드클라우드" style="width:80%;">
+        </div>
+        <div class="col-2"></div>
+    </div>  
+</div>
+<br><br><br>
+{% endblock %}
