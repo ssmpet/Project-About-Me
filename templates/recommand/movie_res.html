@@ -1,0 +1,27 @@
+{% extends "main/base.html" %}
+{% block title %}영화 추천 서비스{% endblock %}
+{% block additional_head %}
+<style>
+    /* th { text-align: center; width: 14.28%;}
+    td { height: 120px;} */
+    .siksin_img { width: 100px; height: 60px;}
+    table { text-align: center;}
+    td { vertical-align: middle; }
+    a {text-decoration: none; color: #111;}
+</style>
+
+{% endblock%}
+
+{% block subtitle %} 영화 추천 - 결과 {% endblock %}
+{% block content %}
+<div class="container text-center">
+    <div class="row">
+        <div class="col-2"></div>
+        <div class="col-8">
+           결과창입니다.
+        </div>
+        <div class="col-2"></div>
+    </div>    
+</div>
+
+{% endblock %}

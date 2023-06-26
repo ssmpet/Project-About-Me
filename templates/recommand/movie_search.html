@@ -1,0 +1,58 @@
+{% extends "main/base.html" %}
+{% block title %}영화 추천 서비스{% endblock %}
+{% block additional_head %}
+<style>
+    /* th { text-align: center; width: 14.28%;}
+    td { height: 120px;} */
+    .siksin_img { width: 100px; height: 60px;}
+    table { text-align: center;}
+    td { vertical-align: middle; }
+    a {text-decoration: none; color: #111;}
+</style>
+<script>
+     function ischeck() {
+         let title= $('#title').val();
+         let actor = $('#actor').val();
+
+        if(actor == "" & title == "" ){
+            alert("검색할 영화제목이나 배우를 입력해 주세요."); 
+            $('#title').focus();
+            return;
+        } 
+
+        $('#search_form').submit();
+
+    }
+</script>
+{% endblock%}
+
+{% block subtitle %} 영화 추천 {% endblock %}
+{% block content %}
+<div class="container text-center">
+    <div class="row">
+        <div class="col-2"></div>
+        <div class="col-8">
+            <form action="/recommand/movie_list" method="post" id="search_form">
+                <table class="mt-5">
+                    <tr>
+                        <td><label class="col-form-label mt-5">영화 제목</label></td>
+                        <td><input type="text" class="form-control ms-3 mt-5" name="title" id="title" autofocus></td>
+                    </tr>
+                    <tr>
+                        <td><label class="col-form-label mt-3">주연 배우</label></td>
+                        <td><input type="text" class="form-control ms-3 mt-3" name="actor" id="actor"></td>
+                    </tr>
+                    <tr>                        
+                        <td colspan="2" >
+                            <input type="button" class="btn btn-primary mt-3" value="찾기" onclick="ischeck()">
+                            <input type="button" class="btn btn-secondary ms-2 mt-3" type="reset" value="취소">
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+        <div class="col-2"></div>
+    </div>    
+</div>
+
+{% endblock %}

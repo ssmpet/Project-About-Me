@@ -3,6 +3,7 @@ from word.word import word_bp
 from user.user import user_bp
 from aboutme.aboutme import aboutme_bp
 from crawling.crawling import crawling_bp
+from recommand.recommand import recommand_bp
 
 
 app = Flask(__name__)
@@ -14,6 +15,7 @@ app.register_blueprint(user_bp, url_prefix='/user')
 app.register_blueprint(word_bp, url_prefix='/word')
 app.register_blueprint(aboutme_bp, url_prefix='/aboutme')
 app.register_blueprint(crawling_bp, url_prefix='/crawling')
+app.register_blueprint(recommand_bp, url_prefix='/recommand')
 # app.register_blueprint(schedule_bp, url_prefix='/schedule')
 
 
@@ -44,6 +46,6 @@ def index():
 
 if __name__ == '__main__':
     try:
-        app.run(debug=False)
+        app.run(debug=True)
     finally:
         print('main end')
