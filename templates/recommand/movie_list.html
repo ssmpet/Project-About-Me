@@ -36,7 +36,7 @@
                 {% for movie in movies %}
                     <div class="form-check mt-5">
                         <input type="radio" class="form-check-input" id="movie_code" name="movie_code" value="{{movie.code}}" {% if loop.first %} checked {% endif %}>
-                            <img src="{{ movie.img }}" alt="" height="80px;"> {{movie.title}}, {{movie.genre}}, {{movie.date}}
+                            <img src="{{ movie.img }}" alt="" height="80px;"> {{movie.title}}, {{movie.m_genre}}, {{movie.first_d}}
                         <label class="form-check-label" for="movie_code"></label>
                         
                     </div>

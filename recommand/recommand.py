@@ -13,7 +13,9 @@ def movie_search():
 @recommand_bp.route('/movie_list', methods=['GET', 'POST'])
 def movie_list():
     if request.method == 'POST':
-        movies = rm.movie_util()
+        title = request.form['title']
+        actor = request.form['actor']
+        movies = rm.movie_util(title, actor)
         return render_template('/recommand/movie_list.html', movies=movies)
 
 @recommand_bp.route('/movie_res', methods=['GET', 'POST'])
