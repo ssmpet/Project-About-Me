@@ -6,7 +6,8 @@
     td { height: 120px;} */
     /* .iksin_img { width: 100px; height: 60px;} */
     /* table { text-align: center;} */
-    td { vertical-align: middle; }
+    td { vertical-align: middle; white-space: normal; word-wrap: break-word;
+    }
     a {text-decoration: none; color: #111;}
 </style>
 
@@ -49,6 +50,7 @@
         </div>
         <div class="col-1"></div>
     </div>    
+    <br><br><br>
     <div class="row mt-5">
         <h2>추천 영화</h2>
     </div> 
@@ -56,20 +58,24 @@
         <div class="col-1"></div>
         <div class="col-10">
             <table>
-                <tr>
-                    {% if recommand_movies %}
-                        {% for movie in recommand_movies%}
-                        <td><img src="{{movie.img}}" height="300" width="300"><br>
-                            {{movie.title}}
-                        </td>
-                        {% endfor %}
-                    {% endif %}
-                </tr>
+                {% if recommand_movies %}
+                    {% for movie in recommand_movies %}
+                        {% if loop.index0 % 3 == 0 %}
+                            <tr>
+                        {% endif %}
+                            <td width="10%"><img src="{{movie.img}}" class="img-thumbnail mt-2" height="100" width="100"></td>
+                            <td width="20%"><p class="ms-3  mt-2">{{movie.title}}</p></td>
+                        {% if loop.index % 3 == 0 %}
+                            </tr>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}                
             </table>        
         </div>
         <div class="col-1"></div>
     </div>    
 
+    <br><br><br>
     <div class="row mt-5">
         <h2>같은 감독의 다른 작품</h2>
     </div> 
@@ -78,32 +84,24 @@
         <div class="col-10">
             
             <table>
-                <tr>
-                    <td rowspan="6"><img src="{{info.img}}" height="300" width="300"></td>
-                </tr>
-                <tr>
-                    <td><h4 class="ms-3">{{info.title}}</h4></td>
-                </tr>
-                <tr>
-                    <td><p class="ms-3">개봉일 : {{info.first_day}}</p></td>
-                </tr>
-                <tr>
-                    <td><p class="ms-3">장르 : {{info.m_genre}}</p></td>
-                </tr>
-                <tr>
-                    <td><p class="ms-3">등급 : {{ info.m_rated}}</p></td>
-                </tr>
-                <tr>
-                    <td><p class="ms-3">국가 : {{ info.m_nation}}</p></td>
-                </tr>
-            </table>        
-            <br>
-                <h6>시놉시스</h6>
-                {{info.synopsis | safe()}}
+                {% if directors %}
+                    {% for movie in directors %}
+                        {% if loop.index0 % 3 == 0 %}
+                            <tr>
+                        {% endif %}
+                            <td width="10%"><img src="{{movie.img}}" class="img-thumbnail mt-2" height="100" width="100"></td>
+                            <td width="20%"><p class="ms-3  mt-2">{{movie.title}}</p></td>
+                        {% if loop.index % 3 == 0 %}
+                            </tr>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}                
+            </table>  
                       
         </div>
         <div class="col-1"></div>
     </div>    
+    <br><br><br>
     <div class="row mt-5">
         <h2>같은 배우의 다른 작품</h2>
     </div> 
@@ -112,28 +110,19 @@
         <div class="col-10">
             
             <table>
-                <tr>
-                    <td rowspan="6"><img src="{{info.img}}" height="300" width="300"></td>
-                </tr>
-                <tr>
-                    <td><h4 class="ms-3">{{info.title}}</h4></td>
-                </tr>
-                <tr>
-                    <td><p class="ms-3">개봉일 : {{info.first_day}}</p></td>
-                </tr>
-                <tr>
-                    <td><p class="ms-3">장르 : {{info.m_genre}}</p></td>
-                </tr>
-                <tr>
-                    <td><p class="ms-3">등급 : {{ info.m_rated}}</p></td>
-                </tr>
-                <tr>
-                    <td><p class="ms-3">국가 : {{ info.m_nation}}</p></td>
-                </tr>
-            </table>        
-            <br>
-                <h6>시놉시스</h6>
-                {{info.synopsis | safe()}}
+                {% if actors %}
+                    {% for movie in actors %}
+                        {% if loop.index0 % 3 == 0 %}
+                            <tr>
+                        {% endif %}
+                            <td width="10%"><img src="{{movie.img}}" class="img-thumbnail mt-2" height="100" width="100"></td>
+                            <td width="20%"><p class="ms-3  mt-2">{{movie.title}}</p></td>
+                        {% if loop.index % 3 == 0 %}
+                            </tr>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}                
+            </table>  
                       
         </div>
         <div class="col-1"></div>
