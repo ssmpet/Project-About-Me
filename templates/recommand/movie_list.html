@@ -5,7 +5,7 @@
     /* th { text-align: center; width: 14.28%;}
     td { height: 120px;} */
     .siksin_img { width: 100px; height: 60px;}
-    table { text-align: center;}
+    table { text-align: left;}
     td { vertical-align: middle; }
     a {text-decoration: none; color: #111;}
 </style>
@@ -30,17 +30,28 @@
 {% block content %}
 <div class="container text-center">
     <div class="row">
-        <div class="col-2"></div>
-        <div class="col-8">
+        <div class="col-1"></div>
+        <div class="col-10">
             <form action="/recommand/movie_res" method="post" id="search_form">
+                <table class="table">
                 {% for movie in movies %}
-                    <div class="form-check mt-5">
-                        <input type="radio" class="form-check-input" id="movie_code" name="movie_code" value="{{movie.code}}" {% if loop.first %} checked {% endif %}>
-                            <img src="{{ movie.img }}" alt="" height="80px;"> {{movie.title}}, {{movie.m_genre}}, {{movie.first_d}}
-                        <label class="form-check-label" for="movie_code"></label>
-                        
-                    </div>
+                    <tr>
+                        <td width="5%">
+                            <input type="radio" class="form-check-input" id="movie_code" name="movie_code" value="{{movie.code}}" {% if loop.first %} checked {% endif %}>
+                        </td>
+                        <td width="10%">
+                            <img src="{{ movie.img }}" alt="{{movie.title}}" height="100px;">
+                        </td>
+                        <td width="30%">
+                            {{movie.title}}
+                        </td>
+                        <td width="75%">
+                            {{movie.summering}} <br>
+                            개봉일 : {{movie.first_day}}
+                        </td>                        
+                    </tr>
                 {% endfor %}
+                </table>
                 <br>
                 <div class="d-flex justify-content-end mt-5">
                     <input type="button" class="btn btn-secondary me-3" value="뒤로" onclick="javascript:history.back();">
@@ -49,7 +60,7 @@
 
             </form>
         </div>
-        <div class="col-2"></div>
+        <div class="col-1"></div>
     </div>    
 </div>
 

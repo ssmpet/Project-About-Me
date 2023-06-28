@@ -22,5 +22,5 @@ def movie_list():
 def movie_res():
     if request.method == 'POST':
         movie_code = request.form['movie_code'] 
-        rm.movie_recommand(movie_code)
-        return render_template('/recommand/movie_res.html')
+        info = rm.movie_recommand(movie_code)
+        return render_template('/recommand/movie_res.html', info=info)

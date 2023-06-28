@@ -46,6 +46,6 @@ def index():
 
 if __name__ == '__main__':
     try:
-        app.run(debug=False)
+        app.run(debug=True)
     finally:
         print('main end')

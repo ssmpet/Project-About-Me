@@ -4,8 +4,8 @@
 <style>
     /* th { text-align: center; width: 14.28%;}
     td { height: 120px;} */
-    .siksin_img { width: 100px; height: 60px;}
-    table { text-align: center;}
+    /* .iksin_img { width: 100px; height: 60px;} */
+    /* table { text-align: center;} */
     td { vertical-align: middle; }
     a {text-decoration: none; color: #111;}
 </style>
@@ -14,14 +14,131 @@
 
 {% block subtitle %} 영화 추천 - 결과 {% endblock %}
 {% block content %}
-<div class="container text-center">
+<div class="container">
     <div class="row">
-        <div class="col-2"></div>
-        <div class="col-8">
-           결과창입니다.
+        <h2>Info</h2>
+    </div>        
+    <div class="row">
+        <div class="col-1"></div>
+        <div class="col-10">
+
+            <table>
+                <tr>
+                    <td rowspan="6"><img src="{{info.img}}" class="img-thumbnail" height="200" width="200"></td>
+                </tr>
+                <tr>
+                    <td><h4 class="ms-3">{{info.title}}</h4></td>
+                </tr>
+                <tr>
+                    <td><p class="ms-3">개봉일 : {{info.first_day}}</p></td>
+                </tr>
+                <tr>
+                    <td><p class="ms-3">장르 : {{info.m_genre}}</p></td>
+                </tr>
+                <tr>
+                    <td><p class="ms-3">등급 : {{ info.m_rated}}</p></td>
+                </tr>
+                <tr>
+                    <td><p class="ms-3">국가 : {{ info.m_nation}}</p></td>
+                </tr>
+            </table>        
+            <br>
+                <h6>시놉시스</h6>
+                {{info.synopsis | safe()}}
+                      
         </div>
-        <div class="col-2"></div>
+        <div class="col-1"></div>
     </div>    
+    <div class="row mt-5">
+        <h2>추천 영화</h2>
+    </div> 
+    <div class="row">
+        <div class="col-1"></div>
+        <div class="col-10">
+            <table>
+                <tr>
+                    {% if recommand_movies %}
+                        {% for movie in recommand_movies%}
+                        <td><img src="{{movie.img}}" height="300" width="300"><br>
+                            {{movie.title}}
+                        </td>
+                        {% endfor %}
+                    {% endif %}
+                </tr>
+            </table>        
+        </div>
+        <div class="col-1"></div>
+    </div>    
+
+    <div class="row mt-5">
+        <h2>같은 감독의 다른 작품</h2>
+    </div> 
+    <div class="row">
+        <div class="col-1"></div>
+        <div class="col-10">
+            
+            <table>
+                <tr>
+                    <td rowspan="6"><img src="{{info.img}}" height="300" width="300"></td>
+                </tr>
+                <tr>
+                    <td><h4 class="ms-3">{{info.title}}</h4></td>
+                </tr>
+                <tr>
+                    <td><p class="ms-3">개봉일 : {{info.first_day}}</p></td>
+                </tr>
+                <tr>
+                    <td><p class="ms-3">장르 : {{info.m_genre}}</p></td>
+                </tr>
+                <tr>
+                    <td><p class="ms-3">등급 : {{ info.m_rated}}</p></td>
+                </tr>
+                <tr>
+                    <td><p class="ms-3">국가 : {{ info.m_nation}}</p></td>
+                </tr>
+            </table>        
+            <br>
+                <h6>시놉시스</h6>
+                {{info.synopsis | safe()}}
+                      
+        </div>
+        <div class="col-1"></div>
+    </div>    
+    <div class="row mt-5">
+        <h2>같은 배우의 다른 작품</h2>
+    </div> 
+    <div class="row">
+        <div class="col-1"></div>
+        <div class="col-10">
+            
+            <table>
+                <tr>
+                    <td rowspan="6"><img src="{{info.img}}" height="300" width="300"></td>
+                </tr>
+                <tr>
+                    <td><h4 class="ms-3">{{info.title}}</h4></td>
+                </tr>
+                <tr>
+                    <td><p class="ms-3">개봉일 : {{info.first_day}}</p></td>
+                </tr>
+                <tr>
+                    <td><p class="ms-3">장르 : {{info.m_genre}}</p></td>
+                </tr>
+                <tr>
+                    <td><p class="ms-3">등급 : {{ info.m_rated}}</p></td>
+                </tr>
+                <tr>
+                    <td><p class="ms-3">국가 : {{ info.m_nation}}</p></td>
+                </tr>
+            </table>        
+            <br>
+                <h6>시놉시스</h6>
+                {{info.synopsis | safe()}}
+                      
+        </div>
+        <div class="col-1"></div>
+    </div>    
+    <br><br><br>
 </div>
 
 {% endblock %}
