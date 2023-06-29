@@ -13,9 +13,11 @@
      function ischeck() {
          let title= $('#title').val();
          let actor = $('#actor').val();
+         let director = $('#director').val();
 
-        if(actor == "" & title == "" ){
-            alert("검색할 영화제목이나 배우를 입력해 주세요."); 
+
+        if(actor == "" & title == "" & director == "" ){
+            alert("검색할 영화제목이나 배우, 감독을 입력해 주세요."); 
             $('#title').focus();
             return;
         } 
@@ -41,6 +43,10 @@
                     <tr>
                         <td><label class="col-form-label mt-3">주연 배우</label></td>
                         <td><input type="text" class="form-control ms-3 mt-3" name="actor" id="actor"></td>
+                    </tr>
+                    <tr>
+                        <td><label class="col-form-label mt-3">감     독</label></td>
+                        <td><input type="text" class="form-control ms-3 mt-3" name="director" id="director"></td>
                     </tr>
                     <tr>                        
                         <td colspan="2" >

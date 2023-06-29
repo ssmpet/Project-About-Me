@@ -25,7 +25,7 @@
 
             <table>
                 <tr>
-                    <td rowspan="6"><img src="{{info.img}}" class="img-thumbnail" height="200" width="200"></td>
+                    <td rowspan="8"><img src="{{info.img}}" class="img-thumbnail" height="200" width="200"></td>
                 </tr>
                 <tr>
                     <td><h4 class="ms-3">{{info.title}}</h4></td>
@@ -38,6 +38,12 @@
                 </tr>
                 <tr>
                     <td><p class="ms-3">등급 : {{ info.m_rated}}</p></td>
+                </tr>
+                <tr>
+                    <td><p class="ms-3">감독 : {{ info.movie_director}}</p></td>
+                </tr>
+                <tr>
+                    <td><p class="ms-3">배우 : {{ info.star_actor}}</p></td>
                 </tr>
                 <tr>
                     <td><p class="ms-3">국가 : {{ info.m_nation}}</p></td>
