@@ -24,3 +24,10 @@ def movie_res():
         movie_code = request.form['movie_code'] 
         info, recommand_movies, directors, actors = rm.movie_recommand(movie_code)
         return render_template('/recommand/movie_res.html', info=info, recommand_movies=recommand_movies, directors=directors, actors=actors)
+
+
+@recommand_bp.route('/movie_res2/<movie_code>')
+def movie_res2(movie_code):
+    # if request.method == 'POST':
+    info, recommand_movies, directors, actors = rm.movie_recommand(movie_code)
+    return render_template('/recommand/movie_res.html', info=info, recommand_movies=recommand_movies, directors=directors, actors=actors)

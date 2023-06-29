@@ -36,6 +36,7 @@ def movie_recommand(movie_code):
     info = df[df.code == movie_code]
     movie_director = info.movie_director.values[0]
     star_actor = info.star_actor.values[0].replace(' | ', '|')
+    star_actor = re.sub(r'\([^)]*\)', '', star_actor)   # (역할) 지우기
     info = info[['code', 'title', 'img', 'm_genre', 'm_nation', 'm_rated', 'synopsis', 'first_day']].to_dict('records')[0]
 
     # 추천 영화
@@ -54,15 +55,17 @@ def movie_recommand(movie_code):
 
     movies = df.iloc[codes][['code', 'title', 'img']].to_dict('records')
 
-    # 같은 감독의 다른 작품
-    indexs = df[df.movie_director.str.contains(movie_director) & (~df.code.str.contains(movie_code))].index
-    choice_indexs = indexs if len(indexs) < MAX_COUNT else np.random.choice(indexs, MAX_COUNT - 1, replace=False)
-    directors = df.iloc[choice_indexs][['code', 'title', 'img']].to_dict('records')
+    # 같은 감독의 다른 작품 (감독이 없는 경우도 있다.)
+    if movie_director != '':
+        indexs = df[df.movie_director.str.contains(movie_director) & (~df.code.str.contains(movie_code))].index
+        choice_indexs = indexs if len(indexs) < MAX_COUNT else np.random.choice(indexs, MAX_COUNT - 1, replace=False)
+        directors = df.iloc[choice_indexs][['code', 'title', 'img']].to_dict('records')
     
 
-    # 같은 배우들의 다른 작품
-    indexs = df[df.star_actor.str.contains(star_actor) & (~df.code.str.contains(movie_code))].index
-    choice_indexs = indexs if len(indexs) < MAX_COUNT else np.random.choice(indexs, MAX_COUNT - 1, replace=False)
-    actors = df.iloc[choice_indexs][['code', 'title', 'img']].to_dict('records')
+    # 같은 배우들의 다른 작품(배우가 없는 경우도 있다.)
+    if star_actor != '':
+        indexs = df[df.star_actor.str.contains(star_actor) & (~df.code.str.contains(movie_code))].index
+        choice_indexs = indexs if len(indexs) < MAX_COUNT else np.random.choice(indexs, MAX_COUNT - 1, replace=False)
+        actors = df.iloc[choice_indexs][['code', 'title', 'img']].to_dict('records')
 
     return info, movies, directors, actors
