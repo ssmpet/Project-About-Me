@@ -15,7 +15,8 @@ def movie_list():
     if request.method == 'POST':
         title = request.form['title']
         actor = request.form['actor']
-        movies = rm.movie_util(title, actor)
+        director = request.form['director']
+        movies = rm.movie_util(title, actor, director)
         return render_template('/recommand/movie_list.html', movies=movies)
 
 @recommand_bp.route('/movie_res', methods=['GET', 'POST'])

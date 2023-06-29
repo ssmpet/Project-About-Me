@@ -6,7 +6,7 @@ from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 
 
-def movie_util(title, actor):
+def movie_util(title, actor, director):
     movies = []
     filename = os.path.join(current_app.static_folder, 'data/movie_test.csv')
 
@@ -14,9 +14,11 @@ def movie_util(title, actor):
     df.fillna('', inplace=True)
     title = re.sub('['+string.punctuation+']', '', title).lower()
     actor = re.sub('['+string.punctuation+']', '', actor).lower()
+    director = re.sub('['+string.punctuation+']', '', director).lower()
 
     movies = df[df.title.str.replace('['+string.punctuation+']', '', regex=True).str.contains(title, case=False) &
-                df.star_actor.str.replace('['+string.punctuation+']', '', regex=True).str.contains(actor, case=False)]
+                df.star_actor.str.replace('['+string.punctuation+']', '', regex=True).str.contains(actor, case=False) &
+                df.movie_director.str.replace('['+string.punctuation+']', '', regex=True).str.contains(director, case=False)]
 
     movies = movies[['code', 'title', 'summering', 'first_day', 'img']].to_dict('records')
 
@@ -37,7 +39,7 @@ def movie_recommand(movie_code):
     movie_director = info.movie_director.values[0]
     star_actor = info.star_actor.values[0].replace(' | ', '|')
     star_actor = re.sub(r'\([^)]*\)', '', star_actor)   # (역할) 지우기
-    info = info[['code', 'title', 'img', 'm_genre', 'm_nation', 'm_rated', 'synopsis', 'first_day']].to_dict('records')[0]
+    info = info[['code', 'title', 'movie_director', 'star_actor', 'img', 'm_genre', 'm_nation', 'm_rated', 'synopsis', 'first_day']].to_dict('records')[0]
 
     # 추천 영화
     df['total'] = df.morphs + (' ' + df.title) + (' ' + df.m_genre) * 3 + \
