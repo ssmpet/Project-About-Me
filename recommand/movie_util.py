@@ -1,11 +1,12 @@
 from flask import current_app
 import numpy as np
 import pandas as pd
-import re, os, string
+import re, os, string, joblib
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 
 
+# 검색 (영화제목, 배우, 감독)
 def movie_util(title, actor, director):
     movies = []
     filename = os.path.join(current_app.static_folder, 'data/movie.csv')
@@ -24,7 +25,11 @@ def movie_util(title, actor, director):
 
     return movies
 
+def clean_text(text):
+    text = re.sub('['+string.punctuation+']', ' ', text).lower()
+    return text
 
+# 선택한 영화 코드로 추천하기
 def movie_recommand(movie_code):
 
     MAX_COUNT = 10
@@ -34,6 +39,8 @@ def movie_recommand(movie_code):
     df.code = df.code.astype(str)
     df.fillna('', inplace=True)
 
+    cosine_sim_cv = joblib.load(os.path.join(current_app.static_folder, 'data/movie_cosine_sim.sim'))
+
     # 해당 무비 정보
     info = df[df.code == movie_code]
     movie_director = info.movie_director.values[0]
@@ -41,19 +48,19 @@ def movie_recommand(movie_code):
     star_actor = re.sub(r'\([^)]*\)', '', star_actor)   # (역할) 지우기
     info = info[['code', 'title', 'movie_director', 'star_actor', 'img', 'm_genre', 'm_nation', 'm_rated', 'synopsis', 'first_day']].to_dict('records')[0]
 
-    # 추천 영화
-    df['total'] = df.morphs + (' ' + df.title) + (' ' + df.m_genre) * 3 + \
-                (' ' + df.movie_director) * 2 + (' ' + df.star_actor) * 2
+    # # 추천 영화
+    # df['total'] = df.morphs + (' ' + df.title) + (' ' + df.m_genre) * 3 + \
+    #             (' ' + clean_text(movie_director)) * 2 + (' ' + clean_text(star_actor)) * 2
     
+    # cvect = CountVectorizer(stop_words='english')
+    # total_cv = cvect.fit_transform(df.total)
+    # cosine_sim_cv = cosine_similarity(total_cv)
     
+
     indices = pd.Series(df.index, index=df.code)
-    cvect = CountVectorizer(stop_words='english')
-    total_cv = cvect.fit_transform(df.total)
-    cosine_sim_cv = cosine_similarity(total_cv)
-    
     index = indices[movie_code]
     sim_scores = pd.Series(cosine_sim_cv[index])
-    codes = sim_scores.sort_values(ascending=False).head(7).tail(6).index
+    codes = sim_scores.sort_values(ascending=False).head(7).tail(6).index  # 6개만
 
     movies = df.iloc[codes][['code', 'title', 'img']].to_dict('records')
 
