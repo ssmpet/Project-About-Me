@@ -8,7 +8,7 @@ from sklearn.metrics.pairwise import cosine_similarity
 
 def movie_util(title, actor, director):
     movies = []
-    filename = os.path.join(current_app.static_folder, 'data/movie_test.csv')
+    filename = os.path.join(current_app.static_folder, 'data/movie.csv')
 
     df = pd.read_csv(filename)
     df.fillna('', inplace=True)
@@ -29,7 +29,7 @@ def movie_recommand(movie_code):
 
     MAX_COUNT = 10
     info, movies, directors, actors  = [], [], [], []
-    filename = os.path.join(current_app.static_folder, 'data/movie_test.csv')
+    filename = os.path.join(current_app.static_folder, 'data/movie.csv')
     df = pd.read_csv(filename)
     df.code = df.code.astype(str)
     df.fillna('', inplace=True)
