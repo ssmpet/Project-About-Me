@@ -4,7 +4,7 @@
 
 ### 나의 포트폴리오입니다.
 
-#### * aboutme
+#### <i class="fa-solid fa-seedling"></i> aboutme
 - 나의 소개글
 
 #### * cartogram
