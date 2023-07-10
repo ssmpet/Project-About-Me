@@ -1,0 +1,66 @@
+{% extends "main/base.html" %}
+{% block title %} 카토그램 {% endblock %}
+
+{% block subtitle %} 카토그램 {% endblock %}
+
+{% block additional_head %}
+<style>
+</style>
+<script>
+
+    function population(type) {
+
+        let filename = ''; 
+        let title = '';
+
+        switch(type) {
+            case 1:
+                title = '<i class="fa-solid fa-seedling"></i> 인구소멸위기지역';
+                filename = `{{url_for('static', filename='img/cartogram/population01.png')}}`;
+                break;
+            case 2:
+                title = '<i class="fa-solid fa-seedling"></i> 인구소멸비율';
+                filename = `{{url_for('static', filename='img/cartogram/population02.png')}}`;
+                break;
+            case 3:
+                title = '<i class="fa-solid fa-seedling"></i> 인구소멸고위험지역'; 
+                filename = `{{url_for('static', filename='img/cartogram/population03.png')}}`;
+                break;    
+            case 4:
+                title = '<i class="fa-solid fa-seedling"></i> 총인구수';
+                filename = `{{url_for('static', filename='img/cartogram/population04.png')}}`;
+                break;
+        }
+
+        $('.pop_title').html(title);
+        $('#pop_img').attr("src", filename);
+
+    }
+</script>
+
+{% endblock%}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row mt-3">
+        <div class="col-3">
+            <h2 class="pop_title"><i class="fa-solid fa-seedling"></i> 인구소멸위기지역</h2>
+            <br>
+            <p>
+                인구 소멸 지역의 정의 : 65세 이상 노인 인구와 20~39세 여성 인구를 비교해서 
+                젊은 여성 인구가 노인 인구의 절반에 미달할 경우(0.5 미만) 인구 소멸 위험 지역으로 분류 
+                (고위험지역 - 0.2 미만)
+            </p>
+            <button type="button" class="btn btn-primary mt-3" onclick="population(1)">인구소멸위기지역</button><br>
+            <button type="button" class="btn btn-primary mt-3" onclick="population(2)">인구소멸비율</button><br>
+            <button type="button" class="btn btn-primary mt-3" onclick="population(3)">인구소멸고위험지역</button><br>
+            <button type="button" class="btn btn-primary mt-3" onclick="population(4)">총인구수</button>
+        </div>
+        <div class="col-6">
+            <img id="pop_img" src="{{url_for('static', filename='img/cartogram/population01.png')}}" class="mx-auto d-block" alt="인구소멸위기지역" width="600">
+        </div>
+        <div class="col-3"></div>
+    </div> 
+</div>
+<br><br><br>
+{% endblock %}

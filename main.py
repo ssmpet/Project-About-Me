@@ -4,6 +4,7 @@ from user.user import user_bp
 from aboutme.aboutme import aboutme_bp
 from crawling.crawling import crawling_bp
 from recommand.recommand import recommand_bp
+from cartogram.cartogram import cartogram_bp
 
 
 app = Flask(__name__)
@@ -16,6 +17,7 @@ app.register_blueprint(word_bp, url_prefix='/word')
 app.register_blueprint(aboutme_bp, url_prefix='/aboutme')
 app.register_blueprint(crawling_bp, url_prefix='/crawling')
 app.register_blueprint(recommand_bp, url_prefix='/recommand')
+app.register_blueprint(cartogram_bp, url_prefix='/cartogram')
 # app.register_blueprint(schedule_bp, url_prefix='/schedule')
 
 
